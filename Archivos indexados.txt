@@ -1,0 +1,30 @@
+#Archivos indexados
+
+#Crear archivo indexado
+Buffer Archivo
+  reg-archivo
+    ClavePrincipal: key1
+    ClaveSecundaria: key2
+    
+    Info1: X(10)
+    Info2: N(10)
+    .
+    .
+    .
+    Campon ...
+Fin-Buffer
+
+#Abrir Archivo
+Abrir Archivo(Entrada)
+Abrir Archivo(Salida)
+Abrir Archivo(Entrada/Salida)
+
+#Leer Archivo
+Leer Archivo
+Lerr Archivo (Key_n = String/Int/Whatever)
+
+#Escribir Archivo
+Escriba Archivo
+
+#Actualizar un registro
+Reescriba Archivo
