@@ -1,6 +1,6 @@
-#Archivos indexados
+# Archivos indexados
 
-#Crear archivo indexado
+# Crear archivo indexado
 Buffer Archivo
   reg-archivo
     ClavePrincipal: key1
@@ -11,20 +11,20 @@ Buffer Archivo
     .
     .
     .
-    Campon ...
+    Campo ...
 Fin-Buffer
 
-#Abrir Archivo
+# Abrir Archivo
 Abrir Archivo(Entrada)
 Abrir Archivo(Salida)
 Abrir Archivo(Entrada/Salida)
 
-#Leer Archivo
+# Leer Archivo
 Leer Archivo
 Lerr Archivo (Key_n = String/Int/Whatever)
 
-#Escribir Archivo
+# Escribir Archivo
 Escriba Archivo
 
-#Actualizar un registro
+# Actualizar un registro
 Reescriba Archivo
