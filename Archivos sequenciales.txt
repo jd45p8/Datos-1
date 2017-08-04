@@ -1,0 +1,22 @@
+#Archivos sequenciales
+
+#Crear Archivo
+Buffer Archivo
+  reg-archivo
+    Info X(20)
+Fin Buffer
+
+#Abrir Archivo
+Abrir Archivo(Entrada) #Para leer sus registros
+Abrir Archivo(Salida) #Para escribir sobre el archivo
+
+#Cerrar Archivo
+Cerrar Archivo
+
+#Final del Archivo
+EOF(Archivo)
+
+#Ecribir Info
+Escribir Info 
+
+
