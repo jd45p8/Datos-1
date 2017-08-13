@@ -6,9 +6,11 @@
 package lecturaescrituraarchivos.Model;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -16,16 +18,20 @@ import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import lecturaescrituraarchivos.View.Menu;
 
 /**
  *
- * @author jd45
+ * @author jd45archivo
  */
 public class Archivo {
 
     BufferedReader reader;
-    File file;
-    ArrayList<Registro> registros;
+    File file;    
+
+    public Archivo() {
+        
+    }
 
     public BufferedReader getReader() {
         return reader;
@@ -43,21 +49,9 @@ public class Archivo {
         this.file = file;
     }
     
-    public Archivo() {
-        this.registros = new ArrayList<>();
-    }
-
-    public ArrayList<Registro> getRegistros() {
-        return registros;
-    }
-
-    public void setRegistros(ArrayList<Registro> Registros) {
-        this.registros = Registros;
-    }
-
     public void Seleccionar(JFrame parent) {
         JFileChooser chooser = new JFileChooser();
-        chooser.setFileFilter(new FileNameExtensionFilter("txt", ".txt"));
+        chooser.setFileFilter(new FileNameExtensionFilter(".txt","txt"));
         int response = chooser.showOpenDialog(parent);
 
         if (response == JFileChooser.APPROVE_OPTION) {
@@ -85,8 +79,7 @@ public class Archivo {
             if (this.reader != null) {
                 try {
                     String line = this.reader.readLine();
-                    if (line.equals("") == false) {
-                        this.registros.add(new Registro(line));
+                    if (line != null) {                        
                         return line;
                     } else {
                         return "EOF";
@@ -97,20 +90,36 @@ public class Archivo {
                 }
             } else {
                 System.out.println("Archivo no abierto.");
-                return null;
+                return "EOF";
             }
         }
         System.out.println("Archivo no seleccionado.");
-        return null;
+        return "EOF";
     }
 
     public void cerrar() {
-        try {
-            registros = new ArrayList<>();
-            this.reader.close();
+        try {      
+            if(reader != null)
+                this.reader.close();
         } catch (IOException ex) {
             Logger.getLogger(Archivo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
+    public void escribir(ArrayList<Registro> registros, String input){
+        if (this.file != null) {
+            registros.add(new Registro(input));            
+            try {
+                BufferedWriter writer = new BufferedWriter(new FileWriter(this.file.getAbsolutePath()));
+                for (Registro registro : registros) {
+                    writer.write(registro.getInfo());
+                    writer.newLine();
+                }
+                writer.close();
+            } catch (IOException ex) {
+                Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else
+            System.out.println("Archivo no seleccionado");
+    }
 }
